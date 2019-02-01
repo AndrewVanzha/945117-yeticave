@@ -1,7 +1,7 @@
 # Личный проект «YetiCave»
 
 * Студент: [Андрей Vanzha](https://up.htmlacademy.ru/php/8/user/945117).
-* Наставник: `Неизвестно`.
+* Наставник: [Антон Дорожкин] https://htmlacademy.ru/profile/trekov.
 
 ---
 
