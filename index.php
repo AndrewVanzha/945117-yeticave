@@ -1,9 +1,46 @@
 <?php
 $is_auth = rand(0, 1);
-$i;
 $user_name = 'Андрей Ванжа'; // укажите здесь ваше имя
-$item_type = [];
-$item_table = [];
+$i;
+$item_type = ["Доски и лыжи", "Крепления", "Ботинки", "Одежда", "Инструменты", "Разное"];
+$item_table = [
+  [
+    'Название' => '2014 Rossignol District Snowboard', 
+    'Категория' => 'Доски и лыжи', 
+    'Цена' => '10999', 
+    'URL Картинки' => 'img/lot-1.jpg'
+  ],
+  [
+    'Название' => 'DC Ply Mens 2016/2017 Snowboard', 
+    'Категория' => 'Доски и лыжи', 
+    'Цена' => '159999', 
+    'URL Картинки' => 'img/lot-2.jpg'
+  ],
+  [
+    'Название' => 'Крепления Union Contact Pro 2015 года размер L/XL', 
+    'Категория' => 'Крепления', 
+    'Цена' => '8000', 
+    'URL Картинки' => 'img/lot-3.jpg'
+  ],
+  [
+    'Название' => 'Ботинки для сноуборда DC Mutiny Charocal', 
+    'Категория' => 'Ботинки', 
+    'Цена' => '10999', 
+    'URL Картинки' => 'img/lot-4.jpg'
+  ],
+  [
+    'Название' => 'Куртка для сноуборда DC Mutiny Charocal', 
+    'Категория' => 'Одежда', 
+    'Цена' => '7500', 
+    'URL Картинки' => 'img/lot-5.jpg'
+  ],
+  [
+    'Название' => 'Маска Oakley Canopy', 
+    'Категория' => 'Разное', 
+    'Цена' => '5400', 
+    'URL Картинки' => 'img/lot-6.jpg'
+  ]
+];
 ?>
 <!DOCTYPE html>
 <html lang="ru">
@@ -33,7 +70,7 @@ $item_table = [];
         <!-- здесь должен быть PHP код для показа имени пользователя -->
 		<?php if ($is_auth === 1) { ?>
 			<div class="user-menu__logged">
-				<p><?php echo(strip_tags($user_name)); ?></p>
+				<p><?php echo strip_tags($user_name); ?></p>
 			</div>
 		<?php } else { ?>
 			<ul class="user-menu__list">
@@ -56,9 +93,13 @@ $item_table = [];
         <p class="promo__text">На нашем интернет-аукционе ты найдёшь самое эксклюзивное сноубордическое и горнолыжное снаряжение.</p>
         <ul class="promo__list">
             <!--заполните этот список из массива категорий-->
+            <?php for ($i=0; $i<count($item_type); $i++) { ?>
             <li class="promo__item promo__item--boards">
-                <a class="promo__link" href="pages/all-lots.html">Имя категории</a>
+                <a class="promo__link" href="pages/all-lots.html">
+                  <?php print($item_type[$i]); ?>
+                </a>
             </li>
+            <?php } ?>
         </ul>
     </section>
     <section class="lots">
@@ -94,9 +135,13 @@ $item_table = [];
     <nav class="nav">
         <ul class="nav__list container">
             <!--заполните этот список из массива категорий-->
+            <?php for ($i=0; $i<count($item_type); $i++) { ?>
             <li class="nav__item">
-                <a href="pages/all-lots.html">Название категории</a>
+                <a href="pages/all-lots.html">
+                  <?php print($item_type[$i]); ?>
+                </a>
             </li>
+            <?php } ?>
         </ul>
     </nav>
     <div class="main-footer__bottom container">
