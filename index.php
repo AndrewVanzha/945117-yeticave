@@ -29,9 +29,9 @@ $user_name = 'Андрей Ванжа'; // укажите здесь ваше и
         <nav class="user-menu">
 
         <!-- здесь должен быть PHP код для показа имени пользователя -->
-		<?php if (round($is_auth) === 1) { ?>
+		<?php if ($is_auth === 1) { ?>
 			<div class="user-menu__logged">
-				<p><?php echo($user_name) ?></p>
+				<p><?php echo(strip_tags($user_name)); ?></p>
 			</div>
 		<?php } else { ?>
 			<ul class="user-menu__list">
