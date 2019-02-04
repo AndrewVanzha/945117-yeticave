@@ -1,7 +1,9 @@
 <?php
 $is_auth = rand(0, 1);
-
+$i;
 $user_name = 'Андрей Ванжа'; // укажите здесь ваше имя
+$item_type = [];
+$item_table = [];
 ?>
 <!DOCTYPE html>
 <html lang="ru">
