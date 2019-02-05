@@ -1,46 +1,48 @@
 <?php
 $is_auth = rand(0, 1);
 $user_name = 'Андрей Ванжа'; // укажите здесь ваше имя
-$i;
+
 $item_type = ["Доски и лыжи", "Крепления", "Ботинки", "Одежда", "Инструменты", "Разное"];
 $item_table = [
   [
-    'Название' => '2014 Rossignol District Snowboard', 
-    'Категория' => 'Доски и лыжи', 
-    'Цена' => '10999', 
-    'URL Картинки' => 'img/lot-1.jpg'
+    'Name' => '2014 Rossignol District Snowboard', 
+    'Category' => 'Доски и лыжи', 
+    'Price' => '10999', 
+    'URL' => 'img/lot-1.jpg'
   ],
   [
-    'Название' => 'DC Ply Mens 2016/2017 Snowboard', 
-    'Категория' => 'Доски и лыжи', 
-    'Цена' => '159999', 
-    'URL Картинки' => 'img/lot-2.jpg'
+    'Name' => 'DC Ply Mens 2016/2017 Snowboard', 
+    'Category' => 'Доски и лыжи', 
+    'Price' => '159999', 
+    'URL' => 'img/lot-2.jpg'
   ],
   [
-    'Название' => 'Крепления Union Contact Pro 2015 года размер L/XL', 
-    'Категория' => 'Крепления', 
-    'Цена' => '8000', 
-    'URL Картинки' => 'img/lot-3.jpg'
+    'Name' => 'Крепления Union Contact Pro 2015 года размер L/XL', 
+    'Category' => 'Крепления', 
+    'Price' => '8000', 
+    'URL' => 'img/lot-3.jpg'
   ],
   [
-    'Название' => 'Ботинки для сноуборда DC Mutiny Charocal', 
-    'Категория' => 'Ботинки', 
-    'Цена' => '10999', 
-    'URL Картинки' => 'img/lot-4.jpg'
+    'Name' => 'Ботинки для сноуборда DC Mutiny Charocal', 
+    'Category' => 'Ботинки', 
+    'Price' => '10999', 
+    'URL' => 'img/lot-4.jpg'
   ],
   [
-    'Название' => 'Куртка для сноуборда DC Mutiny Charocal', 
-    'Категория' => 'Одежда', 
-    'Цена' => '7500', 
-    'URL Картинки' => 'img/lot-5.jpg'
+    'Name' => 'Куртка для сноуборда DC Mutiny Charocal', 
+    'Category' => 'Одежда', 
+    'Price' => '7500', 
+    'URL' => 'img/lot-5.jpg'
   ],
   [
-    'Название' => 'Маска Oakley Canopy', 
-    'Категория' => 'Разное', 
-    'Цена' => '5400', 
-    'URL Картинки' => 'img/lot-6.jpg'
+    'Name' => 'Маска Oakley Canopy', 
+    'Category' => 'Разное', 
+    'Price' => '5400', 
+    'URL' => 'img/lot-6.jpg'
   ]
 ];
+
+	include 'yetisum.php';
 ?>
 <!DOCTYPE html>
 <html lang="ru">
@@ -93,13 +95,13 @@ $item_table = [
         <p class="promo__text">На нашем интернет-аукционе ты найдёшь самое эксклюзивное сноубордическое и горнолыжное снаряжение.</p>
         <ul class="promo__list">
             <!--заполните этот список из массива категорий-->
-            <?php for ($i=0; $i<count($item_type); $i++) { ?>
+            <?php foreach ($item_type as $value): ?>
             <li class="promo__item promo__item--boards">
                 <a class="promo__link" href="pages/all-lots.html">
-                  <?php print($item_type[$i]); ?>
+                  <?php print(strip_tags($value)); ?>
                 </a>
             </li>
-            <?php } ?>
+            <?php endforeach; ?>
         </ul>
     </section>
     <section class="lots">
@@ -108,21 +110,20 @@ $item_table = [
         </div>
         <ul class="lots__list">
             <!--заполните этот список из массива с товарами-->
-            <?php for ($i=0; $i<count($item_table); $i++) { ?>
+            <?php foreach ($item_table as $key => $value): ?>
             <li class="lots__item lot">
                 <div class="lot__image">
-                    <img src="<?php print($item_table[$i]['URL Картинки']); ?>" width="350" height="260" alt="<?php print($item_table[$i]['Название']); ?>">
+                    <img src="<?=strip_tags($value['URL']); ?>" width="350" height="260" alt="<?=strip_tags($value['Name']); ?>">
                 </div>
                 <div class="lot__info">
                     <span class="lot__category">Название категории</span>
-                    <?php print($item_table[$i]['Категория']); ?>
+                    <?php strip_tags($value['Category']); ?>
                     <h3 class="lot__title"><a class="text-link" href="pages/lot.html">Название товара</a></h3>
-                    <?php print($item_table[$i]['Название']); ?>
+                    <?php strip_tags($value['Name']); ?>
                     <div class="lot__state">
                         <div class="lot__rate">
                             <span class="lot__amount">Стартовая цена</span>
-                            <?php print($item_table[$i]['Цена']); ?>
-                            <span class="lot__cost">цена<b class="rub">р</b></span>
+                            <span class="lot__cost"><?=yetisum(strip_tags($value['Price'])); ?><b class="rub">р</b></span>
                         </div>
                         <div class="lot__timer timer">
                             12:23
@@ -130,7 +131,7 @@ $item_table = [
                     </div>
                 </div>
             </li>
-            <?php } ?>
+            <?php endforeach; ?>
         </ul>
     </section>
 </main>
@@ -140,13 +141,13 @@ $item_table = [
     <nav class="nav">
         <ul class="nav__list container">
             <!--заполните этот список из массива категорий-->
-            <?php for ($i=0; $i<count($item_type); $i++) { ?>
+            <?php foreach ($item_type as $value): ?>
             <li class="nav__item">
                 <a href="pages/all-lots.html">
-                  <?php print($item_type[$i]); ?>
+                  <?php print(strip_tags($value)); ?>
                 </a>
             </li>
-            <?php } ?>
+            <?php endforeach; ?>
         </ul>
     </nav>
     <div class="main-footer__bottom container">
