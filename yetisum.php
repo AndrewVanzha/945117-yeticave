@@ -1,18 +1,20 @@
 <?php
 
+/**
+* Выводит округленную сумму с пробелом-разделителем и символом рубля
+*
+* @param int $number
+*
+* @return string
+*/
 function yetisum ($number)
 {
-	$mag = 0;
+	$value = 0;
 	if (is_numeric($number)) {
-		$mag = $number;
-		$mag = ceil($mag);
+		$value = ceil($number);
 	}
-	if ($mag >= 1000) {
-		$num_str = number_format($mag, 0, ",", " ");
-	} else {
-		$num_str = number_format($mag);
-	}
-	$num_str .= "&#8381;";
+	$num_str = number_format($value, 0, ",", " ");
+	$num_str .= " &#8381;";
 	return $num_str;
 }
 ?>
