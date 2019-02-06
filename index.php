@@ -7,37 +7,37 @@ $item_table = [
   [
     'Name' => '2014 Rossignol District Snowboard', 
     'Category' => 'Доски и лыжи', 
-    'Price' => '10999', 
+    'Price' => 10999, 
     'URL' => 'img/lot-1.jpg'
   ],
   [
     'Name' => 'DC Ply Mens 2016/2017 Snowboard', 
     'Category' => 'Доски и лыжи', 
-    'Price' => '159999', 
+    'Price' => 159999, 
     'URL' => 'img/lot-2.jpg'
   ],
   [
     'Name' => 'Крепления Union Contact Pro 2015 года размер L/XL', 
     'Category' => 'Крепления', 
-    'Price' => '8000', 
+    'Price' => 8000, 
     'URL' => 'img/lot-3.jpg'
   ],
   [
     'Name' => 'Ботинки для сноуборда DC Mutiny Charocal', 
     'Category' => 'Ботинки', 
-    'Price' => '10999', 
+    'Price' => 10999, 
     'URL' => 'img/lot-4.jpg'
   ],
   [
     'Name' => 'Куртка для сноуборда DC Mutiny Charocal', 
     'Category' => 'Одежда', 
-    'Price' => '7500', 
+    'Price' => 7500, 
     'URL' => 'img/lot-5.jpg'
   ],
   [
     'Name' => 'Маска Oakley Canopy', 
     'Category' => 'Разное', 
-    'Price' => '5400', 
+    'Price' => 5400, 
     'URL' => 'img/lot-6.jpg'
   ]
 ];
@@ -113,17 +113,21 @@ $item_table = [
             <?php foreach ($item_table as $key => $value): ?>
             <li class="lots__item lot">
                 <div class="lot__image">
-                    <img src="<?=strip_tags($value['URL']); ?>" width="350" height="260" alt="<?=strip_tags($value['Name']); ?>">
+                    <?php if(isset($value['URL']) && isset($value['Name'])): ?>
+                        <img src="<?=strip_tags($value['URL']); ?>" width="350" height="260" alt="<?=strip_tags($value['Name']); ?>">
+                    <?php endif; ?>
                 </div>
                 <div class="lot__info">
                     <span class="lot__category">Название категории</span>
-                    <?php strip_tags($value['Category']); ?>
+                    <?php if(isset($value['Category'])) { echo strip_tags($value['Category']); } ?>
                     <h3 class="lot__title"><a class="text-link" href="pages/lot.html">Название товара</a></h3>
-                    <?php strip_tags($value['Name']); ?>
+                    <?php if(isset($value['Name'])) { echo strip_tags($value['Name']); } ?>
                     <div class="lot__state">
                         <div class="lot__rate">
                             <span class="lot__amount">Стартовая цена</span>
-                            <span class="lot__cost"><?=yetisum(strip_tags($value['Price'])); ?><b class="rub">р</b></span>
+                            <?php if(isset($value['Price'])): ?>
+                                <span class="lot__cost"><?=strip_tags(yetisum($value['Price'])); ?></span>
+                            <?php endif; ?>
                         </div>
                         <div class="lot__timer timer">
                             12:23
