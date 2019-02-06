@@ -13,7 +13,7 @@ $item_table = [
   [
     'Name' => 'DC Ply Mens 2016/2017 Snowboard', 
     'Category' => 'Доски и лыжи', 
-    'Price' => 1599999, 
+    'Price' => 159999, 
     'URL' => 'img/lot-2.jpg'
   ],
   [
@@ -113,7 +113,7 @@ $item_table = [
             <?php foreach ($item_table as $key => $value): ?>
             <li class="lots__item lot">
                 <div class="lot__image">
-                    <?php if(isset($value['URL'])): ?>
+                    <?php if(isset($value['URL']) && isset($value['Name'])): ?>
                         <img src="<?=strip_tags($value['URL']); ?>" width="350" height="260" alt="<?=strip_tags($value['Name']); ?>">
                     <?php endif; ?>
                 </div>
@@ -126,7 +126,7 @@ $item_table = [
                         <div class="lot__rate">
                             <span class="lot__amount">Стартовая цена</span>
                             <?php if(isset($value['Price'])): ?>
-                                <span class="lot__cost"><?=yetisum(strip_tags($value['Price'])); ?><b class="rub">р</b></span>
+                                <span class="lot__cost"><?=strip_tags(yetisum($value['Price'])); ?></span>
                             <?php endif; ?>
                         </div>
                         <div class="lot__timer timer">

@@ -14,7 +14,7 @@ function yetisum ($number)
 		$value = ceil($number);
 	}
 	$num_str = number_format($value, 0, ",", " ");
-	$num_str .= "&#8381;";
+	$num_str .= " &#8381;";
 	return $num_str;
 }
 ?>
