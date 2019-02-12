@@ -1,16 +1,13 @@
 <?php
 
 //print('working...');
-$item_tp = [];
-$item_tbl = [];
-
-include_once 'functions.php';
 include_once 'data.php';
+include_once 'functions.php';
 
 $page_content = include_template('main.php', [$item_type, $item_table]);
 
-$layout_content = include_template('layout.php', ['content'=>$page_content, 'title'=>'Главная']);
+$layout_content = include_template('layout.php', 
+  [$item_type, 'content'=>$page_content, 'title'=>'yeticave', 'is_auth'=>$is_auth, 'user_name'=>$user_name]);
 
 print($layout_content);
-
 ?>

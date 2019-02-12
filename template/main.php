@@ -4,7 +4,7 @@
         снаряжение.</p>
     <ul class="promo__list">
         <!--заполните этот список из массива категорий-->
-        <?php foreach ($item_type as $value): ?>
+        <?php foreach ($data[0] as $value): ?>
         <li class="promo__item promo__item--boards">
             <a class="promo__link" href="pages/all-lots.html">
                 <?php print(strip_tags($value)); ?>
@@ -19,7 +19,7 @@
     </div>
     <ul class="lots__list">
         <!--заполните этот список из массива с товарами-->
-        <?php foreach ($item_table as $key => $value): ?>
+        <?php foreach ($data[1] as $key => $value): ?>
         <li class="lots__item lot">
             <div class="lot__image">
                 <?php if(isset($value['URL']) && isset($value['Name'])): ?>

@@ -8,18 +8,18 @@
 */
 function include_template($name, $data) {
 //    $name = 'templates/' . $name;
-    $result = '';
+  $result = '';
 
-    if (!is_readable($name)) {
-        return $result;
-    }
-
-    ob_start();
-    extract($data);
-    require $name;
-
-    $result = ob_get_clean();
-
+  if (!is_readable($name)) {
     return $result;
+  }
+
+  ob_start();
+  $ex = extract($data);
+  require $name;
+
+  $result = ob_get_clean();
+
+  return $result;
 }
 ?>

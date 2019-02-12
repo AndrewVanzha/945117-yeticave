@@ -50,7 +50,7 @@
     <nav class="nav">
         <ul class="nav__list container">
             <!--заполните этот список из массива категорий-->
-            <?php foreach ($item_type as $value): ?>
+            <?php foreach ($data[0] as $value): ?>
             <li class="nav__item">
                 <a href="pages/all-lots.html">
                   <?php print(strip_tags($value)); ?>
