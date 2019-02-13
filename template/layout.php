@@ -23,7 +23,6 @@
 
         <nav class="user-menu">
 
-        <!-- здесь должен быть PHP код для показа имени пользователя -->
 		<?php if ($is_auth === 1) { ?>
 			<div class="user-menu__logged">
 				<p><?php echo strip_tags($user_name); ?></p>
@@ -49,8 +48,7 @@
 <footer class="main-footer">
     <nav class="nav">
         <ul class="nav__list container">
-            <!--заполните этот список из массива категорий-->
-            <?php foreach ($data[0] as $value): ?>
+            <?php foreach ($item_type as $value): ?>
             <li class="nav__item">
                 <a href="pages/all-lots.html">
                   <?php print(strip_tags($value)); ?>
