@@ -27,8 +27,11 @@
             <div class="lot__info">
                 <span class="lot__category">Название категории</span>
                 <?php if(isset($value['Category'])) { echo strip_tags($value['Category']); } ?>
-                <h3 class="lot__title"><a class="text-link" href="pages/lot.html">Название товара</a></h3>
-                <?php if(isset($value['Name'])) { echo strip_tags($value['Name']); } ?>
+                <h3 class="lot__title">
+                    <a class="text-link" href="pages/lot.html">
+                        <?php if(isset($value['Name'])) { echo strip_tags($value['Name']); } ?>
+                    </a>
+                </h3>
                 <div class="lot__state">
                     <div class="lot__rate">
                         <span class="lot__amount">Стартовая цена</span>

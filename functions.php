@@ -9,17 +9,6 @@
 function include_template($name, $data) {
   $name = 'templates/' . $name;
   $result = '';
-  $item_type = [];
-  $item_table = [];
-
-  $item_type = $data[0];
-  $item_table = $data[1];
-  if (count($data) > 2) {
-    $content = $data[2];
-    $title = $data[3];
-    $is_auth = $data[4];
-    $user_name = $data[5];
-  }
 
   if (!is_readable($name)) {
     return $result;
