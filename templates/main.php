@@ -41,9 +41,7 @@
                         <?php endif; ?>
                     </div>
                     <div class="lot__timer timer">
-                        <!--12:23-->
-                        <?php printf("%d:%02d", floor($wait_time),
-                          floor(($wait_time-floor($wait_time))*60)); ?>
+                        <?php printf("%d:%02d", $wait_time[0], $wait_time[1]); ?>
                     </div>
                 </div>
             </div>
