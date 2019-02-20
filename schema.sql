@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Фев 19 2019 г., 22:57
+-- Время создания: Фев 20 2019 г., 20:51
 -- Версия сервера: 5.7.20
 -- Версия PHP: 7.2.0
 
@@ -30,7 +30,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `schm_bets` (
   `id` int(8) UNSIGNED NOT NULL COMMENT 'номер',
-  `date` int(8) UNSIGNED NOT NULL COMMENT 'дата регистрации',
+  `date` datetime(6) NOT NULL COMMENT 'дата регистрации',
   `bid_price` int(8) UNSIGNED NOT NULL COMMENT 'цена спроса',
   `id_user` int(8) UNSIGNED NOT NULL COMMENT 'ссылка на пользователя',
   `id_lot` int(8) UNSIGNED NOT NULL COMMENT 'ссылка на лот'
@@ -43,8 +43,8 @@ CREATE TABLE `schm_bets` (
 --
 
 CREATE TABLE `schm_category` (
-  `id` int(8) UNSIGNED NOT NULL,
-  `category` char(30) NOT NULL
+  `id` int(8) UNSIGNED NOT NULL COMMENT 'номер',
+  `category` char(30) NOT NULL COMMENT 'категория'
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='таблица категорий';
 
 -- --------------------------------------------------------
@@ -55,15 +55,15 @@ CREATE TABLE `schm_category` (
 
 CREATE TABLE `schm_lots` (
   `id` int(8) NOT NULL COMMENT 'номер',
-  `date_reg` int(8) UNSIGNED NOT NULL COMMENT 'дата создания',
+  `date_reg` datetime(6) NOT NULL COMMENT 'дата создания',
   `title` char(8) NOT NULL COMMENT 'название',
   `description` varchar(255) NOT NULL COMMENT 'описание',
   `image` varchar(255) NOT NULL COMMENT 'ссылка на изображение',
   `init_price` int(8) UNSIGNED NOT NULL COMMENT 'начальная цена',
-  `date_end` int(8) UNSIGNED NOT NULL COMMENT 'дата завершения',
+  `date_end` datetime(6) NOT NULL COMMENT 'дата завершения',
   `bid_inc` int(8) UNSIGNED NOT NULL COMMENT 'шаг ставки',
   `id_user` int(8) UNSIGNED NOT NULL COMMENT 'ссылка на пользователя',
-  `id_winner` int(8) UNSIGNED NOT NULL COMMENT 'ссылка на победителя',
+  `id_winner` int(8) UNSIGNED COMMENT 'ссылка на победителя',
   `id_category` int(8) UNSIGNED NOT NULL COMMENT 'ссылка на категорию'
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='таблица лотов';
 
@@ -74,13 +74,13 @@ CREATE TABLE `schm_lots` (
 --
 
 CREATE TABLE `schm_users` (
-  `id` int(8) UNSIGNED NOT NULL COMMENT 'id',
+  `id` int(8) UNSIGNED NOT NULL COMMENT 'номер',
   `name` varchar(30) NOT NULL COMMENT 'имя',
   `email` varchar(30) NOT NULL COMMENT 'email',
   `password` char(32) NOT NULL COMMENT 'пароль',
-  `date_reg` int(10) UNSIGNED NOT NULL COMMENT 'дата регистрации',
+  `date_reg` datetime(6) NOT NULL COMMENT 'дата регистрации',
   `contact_info` varchar(255) NOT NULL COMMENT 'контактная инфо',
-  `avatar` varchar(255) NOT NULL COMMENT 'ссылка на аватар',
+  `avatar` varchar(255) COMMENT 'ссылка на аватар',
   `id_lot` int(8) UNSIGNED NOT NULL COMMENT 'созданные лоты',
   `id_bet` int(8) UNSIGNED NOT NULL COMMENT 'ставки'
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='пользователи для БД schema';
@@ -128,7 +128,7 @@ ALTER TABLE `schm_bets`
 -- AUTO_INCREMENT для таблицы `schm_category`
 --
 ALTER TABLE `schm_category`
-  MODIFY `id` int(8) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(8) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'номер';
 
 --
 -- AUTO_INCREMENT для таблицы `schm_lots`
@@ -140,7 +140,7 @@ ALTER TABLE `schm_lots`
 -- AUTO_INCREMENT для таблицы `schm_users`
 --
 ALTER TABLE `schm_users`
-  MODIFY `id` int(8) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'id';
+  MODIFY `id` int(8) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'номер';
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
