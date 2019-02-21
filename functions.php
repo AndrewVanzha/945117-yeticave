@@ -40,4 +40,19 @@ function yetisum ($number)
 	$num_str .= " &#8381;";
 	return $num_str;
 }
+
+/**
+* Считает часы и минуты от заданного момента времени до начала следующих суток
+*
+* @param int $time_moment
+*
+* @return array
+*/
+function yeti_time ($time_moment)
+{
+  $time_gap = (mktime(24, 0, 0) - $time_moment) / 60 / 60;
+
+	return array(floor($time_gap), floor(($time_gap - floor($time_gap)) * 60));
+}
+
 ?>
