@@ -11,6 +11,7 @@ SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
+CREATE DATABASE yeticave DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci;
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -81,9 +82,7 @@ CREATE TABLE `schm_users` (
   `password` char(32) NOT NULL COMMENT 'пароль',
   `date_reg` datetime(6) NOT NULL COMMENT 'дата регистрации',
   `contact_info` varchar(255) NOT NULL COMMENT 'контактная инфо',
-  `avatar` varchar(255) DEFAULT NULL COMMENT 'ссылка на аватар',
-  `id_lot` int(8) UNSIGNED NOT NULL COMMENT 'созданные лоты',
-  `id_bet` int(8) UNSIGNED NOT NULL COMMENT 'ставки'
+  `avatar` varchar(255) DEFAULT NULL COMMENT 'ссылка на аватар'
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='пользователи для БД schema';
 
 --
