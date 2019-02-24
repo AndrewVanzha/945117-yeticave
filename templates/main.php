@@ -37,7 +37,7 @@
                         <span class="lot__amount">Стартовая цена</span>
                         <?php if(isset($value['Price'])): ?>
                         <span class="lot__cost">
-                            <?=strip_tags(yetisum($value['Price'])); ?></span>
+                            <?=strip_tags(yeti_sum($value['Price'])); ?></span>
                         <?php endif; ?>
                     </div>
                     <div class="lot__timer timer">

@@ -13,7 +13,7 @@ $item_table = [
   [
     'Name' => 'DC Ply Mens 2016/2017 Snowboard', 
     'Category' => 'Доски и лыжи', 
-    'Price' => 159999, 
+    'Price' => 15999, 
     'URL' => 'img/lot-2.jpg'
   ],
   [
@@ -41,4 +41,7 @@ $item_table = [
     'URL' => 'img/lot-6.jpg'
   ]
 ];
+
+$item_array = [];
+$i_table = ['Name' => '', 'Category' => '', 'Price' => 0, 'URL' => ''];
 ?>
