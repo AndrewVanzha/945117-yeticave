@@ -30,7 +30,7 @@ function include_template($name, $data) {
 *
 * @return string
 */
-function yetisum ($number)
+function yeti_sum ($number)
 {
 	$value = 0;
 	if (is_numeric($number)) {
@@ -54,5 +54,3 @@ function yeti_time ($time_moment)
 
 	return array(floor($time_gap), floor(($time_gap - floor($time_gap)) * 60));
 }
-
-?>
