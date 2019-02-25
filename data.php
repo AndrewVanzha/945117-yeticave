@@ -5,43 +5,39 @@ $user_name = 'Андрей Ванжа';
 $item_type = ["Доски и лыжи", "Крепления", "Ботинки", "Одежда", "Инструменты", "Разное"];
 $item_table = [
   [
-    'Name' => '2014 Rossignol District Snowboard', 
-    'Category' => 'Доски и лыжи', 
-    'Price' => 10999, 
-    'URL' => 'img/lot-1.jpg'
+    'item' => '2014 Rossignol District Snowboard', 
+    'category' => 'Доски и лыжи', 
+    'price' => 10999, 
+    'pic' => 'img/lot-1.jpg'
   ],
   [
-    'Name' => 'DC Ply Mens 2016/2017 Snowboard', 
-    'Category' => 'Доски и лыжи', 
-    'Price' => 15999, 
-    'URL' => 'img/lot-2.jpg'
+    'item' => 'DC Ply Mens 2016/2017 Snowboard', 
+    'category' => 'Доски и лыжи', 
+    'price' => 15999, 
+    'pic' => 'img/lot-2.jpg'
   ],
   [
-    'Name' => 'Крепления Union Contact Pro 2015 года размер L/XL', 
-    'Category' => 'Крепления', 
-    'Price' => 8000, 
-    'URL' => 'img/lot-3.jpg'
+    'item' => 'Крепления Union Contact Pro 2015 года размер L/XL', 
+    'category' => 'Крепления', 
+    'price' => 8000, 
+    'pic' => 'img/lot-3.jpg'
   ],
   [
-    'Name' => 'Ботинки для сноуборда DC Mutiny Charocal', 
-    'Category' => 'Ботинки', 
-    'Price' => 10999, 
-    'URL' => 'img/lot-4.jpg'
+    'item' => 'Ботинки для сноуборда DC Mutiny Charocal', 
+    'category' => 'Ботинки', 
+    'price' => 10999, 
+    'pic' => 'img/lot-4.jpg'
   ],
   [
-    'Name' => 'Куртка для сноуборда DC Mutiny Charocal', 
-    'Category' => 'Одежда', 
-    'Price' => 7500, 
-    'URL' => 'img/lot-5.jpg'
+    'item' => 'Куртка для сноуборда DC Mutiny Charocal', 
+    'category' => 'Одежда', 
+    'price' => 7500, 
+    'pic' => 'img/lot-5.jpg'
   ],
   [
-    'Name' => 'Маска Oakley Canopy', 
-    'Category' => 'Разное', 
-    'Price' => 5400, 
-    'URL' => 'img/lot-6.jpg'
+    'item' => 'Маска Oakley Canopy', 
+    'category' => 'Разное', 
+    'price' => 5400, 
+    'pic' => 'img/lot-6.jpg'
   ]
 ];
-
-$item_array = [];
-$i_table = ['Name' => '', 'Category' => '', 'Price' => 0, 'URL' => ''];
-?>

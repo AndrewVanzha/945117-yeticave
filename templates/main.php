@@ -20,24 +20,24 @@
         <?php foreach ($item_table as $key => $value): ?>
         <li class="lots__item lot">
             <div class="lot__image">
-                <?php if(isset($value['URL']) && isset($value['Name'])): ?>
-                <img src="<?=strip_tags($value['URL']); ?>" width="350" height="260" alt="<?=strip_tags($value['Name']); ?>">
+                <?php if(isset($value['pic']) && isset($value['item'])): ?>
+                <img src="<?=strip_tags($value['pic']); ?>" width="350" height="260" alt="<?=strip_tags($value['item']); ?>">
                 <?php endif; ?>
             </div>
             <div class="lot__info">
                 <span class="lot__category">Название категории</span>
-                <?php if(isset($value['Category'])) { echo strip_tags($value['Category']); } ?>
+                <?php if(isset($value['category'])) { echo strip_tags($value['category']); } ?>
                 <h3 class="lot__title">
                     <a class="text-link" href="pages/lot.html">
-                        <?php if(isset($value['Name'])) { echo strip_tags($value['Name']); } ?>
+                        <?php if(isset($value['item'])) { echo strip_tags($value['item']); } ?>
                     </a>
                 </h3>
                 <div class="lot__state">
                     <div class="lot__rate">
                         <span class="lot__amount">Стартовая цена</span>
-                        <?php if(isset($value['Price'])): ?>
+                        <?php if(isset($value['price'])): ?>
                         <span class="lot__cost">
-                            <?=strip_tags(yeti_sum($value['Price'])); ?></span>
+                            <?=strip_tags(yeti_sum($value['price'])); ?></span>
                         <?php endif; ?>
                     </div>
                     <div class="lot__timer timer">

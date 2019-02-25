@@ -54,5 +54,3 @@ function yeti_time ($time_moment)
 
 	return array(floor($time_gap), floor(($time_gap - floor($time_gap)) * 60));
 }
-
-?>
