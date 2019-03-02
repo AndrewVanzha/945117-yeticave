@@ -28,16 +28,16 @@
                 <span class="lot__category">Название категории</span>
                 <?php if(isset($value['category'])) { echo strip_tags($value['category']); } ?>
                 <h3 class="lot__title">
-                    <a class="text-link" href="pages/lot.html">
+                    <a class="text-link" href="templates/lot.php?id=<?if(isset($value['id'])) {echo $value['id'];} ?>">
                         <?php if(isset($value['item'])) { echo strip_tags($value['item']); } ?>
                     </a>
                 </h3>
                 <div class="lot__state">
                     <div class="lot__rate">
                         <span class="lot__amount">Стартовая цена</span>
-                        <?php if(isset($value['price'])): ?>
+                        <?php if(isset($value['init_price'])): ?>
                         <span class="lot__cost">
-                            <?=strip_tags(yeti_sum($value['price'])); ?></span>
+                            <?=strip_tags(yeti_sum($value['init_price'])); ?></span>
                         <?php endif; ?>
                     </div>
                     <div class="lot__timer timer">

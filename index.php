@@ -15,32 +15,28 @@ if(!$link) {
 }
 mysqli_set_charset($link, "utf8");
 mysqli_options($link, MYSQLI_OPT_INT_AND_FLOAT_NATIVE, 1);
+$dt = yeti_time(time());
 
 $sql = "SELECT * FROM schm_category";
 $result = mysqli_query($link, $sql);
-if(!$result) {
-  $error = mysql_error($link);
 }
 $cat_rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
 $arr_category = array_column($cat_rows, 'category');
 
-$sql = "SELECT schm_lots.id, schm_lots.title AS item, schm_lots.init_price AS price,
+$sql = "SELECT schm_lots.id, schm_lots.title AS item, schm_lots.init_price AS init_price,
   schm_lots.image AS pic, schm_lots.deal_price, schm_category.category AS category
   FROM schm_lots, schm_category WHERE (schm_lots.id_category = schm_category.id 
-  AND schm_lots.id_winner IS NULL AND schm_lots.date_end > NOW()) ORDER BY schm_lots.date_reg DESC";
+  AND schm_lots.id_winner IS NULL/* AND schm_lots.date_end > NOW()*/) ORDER BY schm_lots.date_reg DESC";
 $result = mysqli_query($link, $sql);
 if(!$result) {
-  $error = mysql_error($link);
+  $error = mysqli_error($link);
 }
 $lots = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
-$time_gap = (mktime(24, 0, 0) - time()) / 60 / 60;
-$dt = yeti_time(time());
-
-$page_content = include_template('main.php',
+$page_content = include_template('templates/main.php',
   ['item_type'=>$arr_category, 'item_table'=>$lots, 'wait_time'=>$dt]);
 
-$layout_content = include_template('layout.php', 
+$layout_content = include_template('templates/layout.php', 
   ['item_type'=>$arr_category, 'content'=>$page_content, 'title'=>'yeticave',
    'is_auth'=>$is_auth, 'user_name'=>$user_name]);
    
