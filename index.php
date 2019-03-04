@@ -19,6 +19,8 @@ $dt = yeti_time(time());
 
 $sql = "SELECT * FROM schm_category";
 $result = mysqli_query($link, $sql);
+if(!$result) {
+  $error = mysqli_error($link);
 }
 $cat_rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
 $arr_category = array_column($cat_rows, 'category');
@@ -33,10 +35,14 @@ if(!$result) {
 }
 $lots = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
-$page_content = include_template('templates/main.php',
+//print('!!'.$dt.'<br>');
+
+$page_content = include_template('main.php',
   ['item_type'=>$arr_category, 'item_table'=>$lots, 'wait_time'=>$dt]);
 
-$layout_content = include_template('templates/layout.php', 
+//print('++'.$page_content.'<br>');
+
+$layout_content = include_template('layout.php', 
   ['item_type'=>$arr_category, 'content'=>$page_content, 'title'=>'yeticave',
    'is_auth'=>$is_auth, 'user_name'=>$user_name]);
    

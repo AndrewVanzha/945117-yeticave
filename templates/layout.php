@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title><?=$title; ?></title>
+    <title><?php $title; ?></title>
     <link href="css/normalize.min.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
 </head>
@@ -43,7 +43,7 @@
     </div>
 </header>
 
-<main class="container"><?=$content; ?></main>
+<main class="container"><?php echo $content; ?></main>
 
 </div>
 

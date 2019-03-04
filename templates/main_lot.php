@@ -12,7 +12,7 @@
 </nav>
 <section class="lot-item container">
     <?php if(isset($item_table[0]['item'])): ?>
-      <h2><?=strip_tags($item_table[0]['item']); ?></h2>
+      <h2><?php strip_tags($item_table[0]['item']); ?></h2>
     <?php endif; ?>
     <div class="lot-item__content">
         <div class="lot-item__left">
@@ -26,7 +26,9 @@
                 <?php if(isset($item_table[0]['category'])) { echo strip_tags($item_table[0]['category']); } ?>
               </span>
             </p>
-            <p class="lot-item__description">Легкий маневренный сноуборд, готовый дать жару в любом парке,
+            <p class="lot-item__description">
+              <?php if(isset($item_table[0]['description'])) { echo strip_tags($item_table[0]['description']); } ?>
+  <!--          Легкий маневренный сноуборд, готовый дать жару в любом парке,
                 растопив
                 снег
                 мощным щелчкоми четкими дугами. Стекловолокно Bi-Ax, уложенное в двух направлениях,
@@ -40,7 +42,8 @@
                 просто
                 посмотрите на Вашу доску и улыбнитесь, крутая графика от Шона Кливера еще никого не
                 оставляла
-                равнодушным.</p>
+                равнодушным.-->
+            </p>
         </div>
         <div class="lot-item__right">
             <div class="lot-item__state">
@@ -55,7 +58,7 @@
                         <?php endif; ?>
                     </div>
                     <div class="lot-item__min-cost">
-                        Мин. ставка <span><?=strip_tags($item_table[0]['init_price']); ?> &#8381;</span>
+                        Мин. ставка <span><?=strip_tags($item_table[0]['curr_price']+$item_table[0]['bid_inc']); ?> &#8381;</span>
                     </div>
                 </div>
                 <form class="lot-item__form" action="https://echo.htmlacademy.ru" method="post">

@@ -28,7 +28,7 @@
                 <span class="lot__category">Название категории</span>
                 <?php if(isset($value['category'])) { echo strip_tags($value['category']); } ?>
                 <h3 class="lot__title">
-                    <a class="text-link" href="templates/lot.php?id=<?if(isset($value['id'])) {echo $value['id'];} ?>">
+                    <a class="text-link" href="lot.php?id=<?php if(isset($value['id'])) {echo $value['id'];} ?>">
                         <?php if(isset($value['item'])) { echo strip_tags($value['item']); } ?>
                     </a>
                 </h3>
