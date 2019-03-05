@@ -23,8 +23,6 @@ $result = mysqli_query($link, $sql);
 if(!$result) {
   $error = mysqli_error($link);
 }
-//$id = mysqli_real_escape_string($link, $_GET['id']);
-print('received id = '.$_GET['id'].'<br>'.'id = '.$id);
 $cat_rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
 $arr_category = array_column($cat_rows, 'category');
 
@@ -38,8 +36,10 @@ if(!$result) {
   $error = mysqli_error($link);
 }
 
-if($id<1 || $id>6) {/* ???? */
-  $page_content = include_template('404.php', ['item_type'=>$arr_category]);
+$selected_lot = mysqli_fetch_all($result, MYSQLI_ASSOC);
+if(count($selected_lot) === 0) {
+print('received id = '.$_GET['id'].'<br>'.'id = '.$id);
+$page_content = include_template('404.php', ['item_type'=>$arr_category]);
 
   $layout_content = include_template('layout.php', 
     ['item_type'=>$arr_category, 'content'=>$page_content, 'title'=>'yeticave',
@@ -48,8 +48,6 @@ if($id<1 || $id>6) {/* ???? */
   print($layout_content);
   }
 else {
-  $selected_lot = mysqli_fetch_all($result, MYSQLI_ASSOC);
-
   $page_content = include_template('main_lot.php',
     ['item_type'=>$arr_category, 'item_table'=>$selected_lot, 'wait_time'=>$dt]);
 

@@ -1,6 +1,5 @@
 <?php
 
-include_once 'data.php';
 include_once 'functions.php';
 
 if(file_exists('config.php')) {
@@ -28,19 +27,15 @@ $arr_category = array_column($cat_rows, 'category');
 $sql = "SELECT schm_lots.id, schm_lots.title AS item, schm_lots.init_price AS init_price,
   schm_lots.image AS pic, schm_lots.deal_price, schm_category.category AS category
   FROM schm_lots, schm_category WHERE (schm_lots.id_category = schm_category.id 
-  AND schm_lots.id_winner IS NULL/* AND schm_lots.date_end > NOW()*/) ORDER BY schm_lots.date_reg DESC";
+  AND schm_lots.id_winner IS NULL AND schm_lots.date_end > NOW()) ORDER BY schm_lots.date_reg DESC";
 $result = mysqli_query($link, $sql);
 if(!$result) {
   $error = mysqli_error($link);
 }
 $lots = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
-//print('!!'.$dt.'<br>');
-
 $page_content = include_template('main.php',
   ['item_type'=>$arr_category, 'item_table'=>$lots, 'wait_time'=>$dt]);
-
-//print('++'.$page_content.'<br>');
 
 $layout_content = include_template('layout.php', 
   ['item_type'=>$arr_category, 'content'=>$page_content, 'title'=>'yeticave',
