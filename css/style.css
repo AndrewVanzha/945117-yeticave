@@ -109,7 +109,7 @@ input.visually-hidden {
 }
 
 .container {
-  width: 1110px;
+  width: 1140px;
   margin: 0 auto;
   padding: 0 15px;
 }
@@ -847,15 +847,21 @@ main.container {
 .form__input-date {
   background: #ffffff url("../img/date.svg") 326px 12px no-repeat;
 }
-
+/*
 .form__error {
   display: none;
   font-size: 11px;
   color: #f84646;
 }
-
+*/
 input:invalid .form__error{
   display: block;
+}
+
+.form__error-red {
+  display: block;
+  font-size: 11px;
+  color: #f84646;
 }
 
 .form__error--bottom {
