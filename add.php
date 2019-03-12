@@ -52,15 +52,11 @@ if(!$result) {
 $cat_rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
 $arr_category = array_column($cat_rows, 'category');
 
-if (!isset($_SERVER['REQUEST_METHOD'])) {
-  print("error with page request");
-}
-else {
   // обработка содержимого _POST - беру данные input из формы
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+if (isset($_SERVER['REQUEST_METHOD']) && ($_SERVER['REQUEST_METHOD']=='POST')) {
 
 // подбираю файл с изображением
-  if (isset($_FILES['file-name'])) {
+  if (isset($_FILES['file-name']) && ($_FILES['file-name']['error']===UPLOAD_ERR_OK)) {
     $finfo = finfo_open(FILEINFO_MIME_TYPE);
     $fname = $_FILES['file-name']['tmp_name'];
     $fsize = $_FILES['file-name']['size'];
@@ -70,10 +66,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       $file_field_error[0] = "Добавьте изображение в правильном формате";
     }
     else {
-      /*if ($_FILES(['file-name']['error']) > 0) {
-        print("file load error");
-      }*/
-      //print($_FILES(['file-name']['error'].'<br>'));
       if ($_FILES['file-name']['type'] === 'image/jpeg') {
         $fext = ".jpg";
       }
@@ -95,23 +87,23 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
   }
   else {
-    $file_field_error[0] = "Добавьте изображение в правильном формате";
+    print("Ошибка загрузки изображения<br>");
+    $file_field_error[2] = "Ошибка загрузки изображения";
   }
 
-// просмотр всех полей полученной формы
-  $lname = (isset($_POST['lot-name']))? htmlspecialchars($_POST['lot-name']) : '';
-//  $form_values['lot-name'] = mysqli_real_escape_string($lname);
+  // просмотр всех полей полученной формы
+  $lname = (isset($_POST['lot-name']))? htmlspecialchars($_POST['lot-name'], ENT_QUOTES, 'cp1251') : '';
+  //$lname = (isset($_POST['lot-name']))? htmlspecialchars($_POST['lot-name']) : '';
+  //$form_values['lot-name'] = mysqli_real_escape_string($lname);
   $form_values['lot-name'] = $lname;
-  $msg = (isset($_POST['message']))? htmlspecialchars($_POST['message']) : '';
+  $msg = (isset($_POST['message']))? htmlspecialchars($_POST['message'], ENT_QUOTES, 'cp1251') : '';
   $form_values['message'] = $msg;
-  $lrate = (isset($_POST['lot-rate']))? htmlspecialchars($_POST['lot-rate']) : '';
-  $form_values['lot-rate'] = $lrate;
-  $ldate = (isset($_POST['lot-date']))? htmlspecialchars($_POST['lot-date']) : '';
-  $form_values['lot-date'] = $ldate;
-  $lstep = (isset($_POST['lot-step']))? htmlspecialchars($_POST['lot-step']) : '';
-  $form_values['lot-step'] = $lstep;
-//  var_dump($cat_rows);
-//  print(' cat_rows<br>');
+  $lrate = (isset($_POST['lot-rate']))? htmlspecialchars($_POST['lot-rate'], ENT_QUOTES, 'cp1251') : '';
+  $form_values['lot-rate'] = ($lrate > 0)? $lrate : '';
+  $ldate = (isset($_POST['lot-date']))? htmlspecialchars($_POST['lot-date'], ENT_QUOTES, 'cp1251') : '';
+  $form_values['lot-date'] = ($ldate > $today_date)? $ldate : '';
+  $lstep = (isset($_POST['lot-step']))? htmlspecialchars($_POST['lot-step'], ENT_QUOTES, 'cp1251') : '';
+  $form_values['lot-step'] = ($lstep > 0)? $lstep : '';
   foreach($cat_rows as $key=>$vcat) {
     if (isset($_POST['category']) && (strcasecmp($_POST['category'], $vcat['category'])==0)) {
       $id_category = $vcat['id'];
@@ -123,14 +115,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 //  var_dump($form_values);
 //  print(' form_values<br>');
 
+  //ищу незаполненные поля формы
   $is_field_error = false;
-  foreach ($required_fields as $field_value) {
-    if (empty($_POST[$field_value])) {
-//      print("empty field!<br>");
-      $field_errors[$field_value] = $field_error_announce[$field_value];
+  foreach ($required_fields as $fvalue) {
+    if (empty($form_values[$fvalue])) {
+    //if (empty($_POST[$fvalue])) {
+      //print("empty field!<br>");
+      $field_errors[$fvalue] = $field_error_announce[$fvalue];
       $is_field_error = true;
     }
   }
+//  var_dump($form_values);
+//  print(' form_values<br>');
 //  var_dump($field_errors);
 //  print("field_errors<br>");
 
@@ -150,7 +146,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       ['item_type'=>$arr_category, 'field_errors'=>$field_errors, 'form_values'=>$form_values, 'wait_time'=>$dt]);
   }
   else {
-    // сформировать новый лот, записать соответствующие данные и показать его
+    // сформировать новый лот, записать соответствующие данные в БД и показать его на экране
     foreach ($required_fields as $field_value) {
       $field_errors[$field_value] = '';
     }
@@ -162,50 +158,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       print("image file movement error");
     }
     // ввод новой строки в БД
-
     $sql = "INSERT INTO `schm_lots` (`id`, `date_reg`, `title`, `description`, `image`, `init_price`,
       `deal_price`, `date_end`, `bid_inc`, `id_user`, `id_winner`, `id_category`)
       VALUES (NULL, '$today_date', '$lname', '$msg', '$furl', '$lrate',
       '$lrate', '$ldate', '$lstep', '1', NULL, '$id_category')";
-//    print($sql.'<br>');
+    //print($sql.'<br>');
 
     $result = mysqli_query($link, $sql);
     if($result) {
-    //if(1) {
-        // определение id последней строки из БД
-      $sql = "SELECT schm_lots.id FROM `schm_lots` ORDER BY `id` DESC LIMIT 1";
-      $result = mysqli_query($link, $sql);
-      if($result) {
-        $last_row = mysqli_fetch_all($result, MYSQLI_ASSOC);
-        $id = $last_row[0]['id'];
-        //var_dump($last_row);
-        //print($id.'  '.$dt.'<br>');
-
-        // чтение нужных данных новой строки и соответствующей категории из БД
-        $sql = "SELECT schm_lots.id, schm_lots.title AS item, schm_lots.init_price AS init_price,
-          schm_lots.image AS pic, schm_lots.deal_price AS curr_price, schm_lots.description,
-          schm_lots.bid_inc, schm_category.category AS category
-          FROM schm_lots, schm_category WHERE (schm_lots.id_category = schm_category.id 
-          AND schm_lots.id = '$id') ORDER BY schm_lots.date_reg DESC";
-        $result = mysqli_query($link, $sql);
-        if($result) {
-          $last_row = mysqli_fetch_all($result, MYSQLI_ASSOC);
-
-          // вызов шаблонов - показать картинку лота с новыми данными и списком категорий
-          $page_content = include_template('main_lot.php',
-            ['item_type'=>$arr_category, 'item_table'=>$last_row, 'wait_time'=>$dt]);
-          }
-          else {
-            print("ошибка чтения последней записи из БД");
-            $error = mysqli_error($link);
-            $content = include_template('404.php', ['item_type'=>$arr_category]);
-          }
-        }
-        else {
-          print("ошибка определения id последней строки из БД");
-          $error = mysqli_error($link);
-          $content = include_template('404.php', ['item_type'=>$arr_category]);
-        }
+      // определение id последней строки из БД
+      $last_id = mysqli_insert_id($link);
+      //print($last_id.' id <br>');
+      header("Location: /yeticave/lot.php?id=".$last_id);
       }
       else {
         print("ошибка записи в БД");
@@ -242,4 +206,3 @@ $layout_content = include_template('layout.php',
 'is_auth'=>$is_auth, 'user_name'=>$user_name]);
 
   print($layout_content);
-}

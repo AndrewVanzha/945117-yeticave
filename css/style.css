@@ -859,7 +859,7 @@ input:invalid .form__error{
 }
 
 .form__error-red {
-  display: block;
+/*  display: block;*/
   font-size: 11px;
   color: #f84646;
 }
@@ -913,11 +913,13 @@ input:invalid .form__error{
   padding: 40px 0;
   box-sizing: border-box;
   border: 1px solid #cad5d8;
+  color: #f84646;
   cursor: pointer;
 }
 
 .form__item--file label span:hover {
   border-color: #45abde;
+  color: #5023ce;
 }
 
 .form__item--uploaded {
@@ -950,10 +952,14 @@ input:invalid .form__error{
   height: 100%;
 }
 
+.form__item--uploaded {
+  color: #f84646;
+}
+/*
 .form__item--uploaded .preview {
   display: block;
 }
-
+*/
 /* Страница лота */
 
 .lot-item {

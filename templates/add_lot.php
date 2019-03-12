@@ -18,7 +18,7 @@
         <div class="form__item form__item--invalid">
             <!-- form__item--invalid -->
             <label for="lot-name">Наименование</label>
-            <input id="lot-name" type="text" name="lot-name" placeholder="Введите наименование лота" value="<?php print($form_values['lot-name']); ?>" >
+            <input id="lot-name" type="text" name="lot-name" placeholder="Введите наименование лота" value="<?php print($form_values['lot-name']); ?>" required>
             <?php if (isset($field_errors['lot-name'])): ?>
               <span class="form__error-red"><?php print($field_errors['lot-name']); ?></span>
             <?php endif; ?>
@@ -39,7 +39,7 @@
     </div>
     <div class="form__item form__item--wide">
         <label for="message">Описание</label>
-        <textarea id="message" name="message" placeholder="Напишите описание лота" value="<?php print($form_values['message']); ?>" ></textarea>
+        <textarea id="message" name="message" placeholder="Напишите описание лота" value="<?php print($form_values['message']); ?>" required></textarea>
         <?php if (isset($field_errors['message'])): ?>
           <span class="form__error-red"><?php print($field_errors['message']); ?></span>
         <?php endif; ?>
@@ -54,7 +54,7 @@
             </div>
         </div>
         <div class="form__input-file">
-            <input type="hidden" name="MAX_FILE_SIZE" value="25000">
+            <input type="hidden" name="MAX_FILE_SIZE" value="50000">
             <input class="visually-hidden" name="file-name" type="file" id="photo2" value="send" required>
             <label for="photo2">
                 <span>+ Добавить</span>
@@ -64,14 +64,14 @@
     <div class="form__container-three">
         <div class="form__item form__item--small">
             <label for="lot-rate">Начальная цена</label>
-            <input id="lot-rate" type="number" name="lot-rate" placeholder="0" value="<?php print($form_values['lot-rate']); ?>" >
+            <input id="lot-rate" type="number" name="lot-rate" placeholder="0" value="<?php print($form_values['lot-rate']); ?>" required>
             <?php if (isset($field_errors['lot-rate'])): ?>
               <span class="form__error-red"><?php print($field_errors['lot-rate']); ?></span>
             <?php endif; ?>
         </div>
         <div class="form__item form__item--small">
             <label for="lot-step">Шаг ставки</label>
-            <input id="lot-step" type="number" name="lot-step" placeholder="0" value="<?php print($form_values['lot-step']); ?>" >
+            <input id="lot-step" type="number" name="lot-step" placeholder="0" value="<?php print($form_values['lot-step']); ?>" required>
             <?php if (isset($field_errors['lot-step'])): ?>
               <span class="form__error-red"><?php print($field_errors['lot-step']); ?></span>
             <?php endif; ?>
